@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Anubhav - Celestial Wishes</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0c1445, #1a237e, #311b92);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .gates-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 60%;
+            perspective: 1000px;
+        }
+
+        .gate {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, #8B4513, #A0522D, #CD853F);
+            border: 8px solid #5D4037;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            transition: transform 2.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            z-index: 10;
+        }
+
+        .gate-left {
+            left: 0;
+            border-right: 4px solid #5D4037;
+            border-radius: 20px 0 0 20px;
+            transform-origin: left center;
+        }
+
+        .gate-right {
+            right: 0;
+            border-left: 4px solid #5D4037;
+            border-radius: 0 20px 20px 0;
+            transform-origin: right center;
+        }
+
+        .gate-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            opacity: 1;
+            transition: opacity 1.5s ease;
+            max-width: 80%;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            z-index: 15;
+        }
+
+        .wish-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 8;
+        }
+
+        .flower {
+            text-align: center;
+            animation: gentle-float 6s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        .flower-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffeb3b, #ff9800);
+            box-shadow:
+                0 0 50px rgba(255, 235, 59, 0.6),
+                0 0 100px rgba(255, 152, 0, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1rem;
+            font-size: 4rem;
+            animation: flower-glow 3s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes gentle-float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-15px) scale(1.02);
+            }
+        }
+
+        @keyframes flower-glow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 50px rgba(255, 235, 59, 0.6),
+                    0 0 100px rgba(255, 152, 0, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.8);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 70px rgba(255, 235, 59, 0.8),
+                    0 0 130px rgba(255, 152, 0, 0.6),
+                    inset 0 0 40px rgba(255, 255, 255, 0.9);
+            }
+        }
+
+        .flower-name {
+            font-size: 1.8rem;
+            color: #FFD700;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        .timer-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow:
+                0 0 40px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+        }
+
+        .timer {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin: 1.5rem 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            font-family: 'Poppins', monospace;
+        }
+
+        .timer-instruction {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #e0e0ff;
+            line-height: 1.6;
+        }
+
+        .constellation {
+            font-size: 8rem;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: 12;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: constellation-float 4s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes constellation-float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.1);
+            }
+        }
+
+        .teddy-container {
+            display: none;
+            text-align: center;
+            animation: gentle-bounce 3s infinite;
+            z-index: 25;
+        }
+
+        @keyframes gentle-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-15px) scale(1.05);
+            }
+        }
+
+        .teddy-emoji {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            animation: boxing 2s infinite;
+        }
+
+        @keyframes boxing {
+
+            0%,
+            100% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateX(-10px) rotate(-5deg);
+            }
+
+            75% {
+                transform: translateX(10px) rotate(5deg);
+            }
+        }
+
+        .teddy-message {
+            font-size: 2rem;
+            margin-top: 1.5rem;
+            color: #FFD700;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .flex-visible {
+            display: flex;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="gates-container">
+            <div class="gate gate-left">
+                <div class="gate-text">OPEN</div>
+            </div>
+            <div class="gate gate-right">
+                <div class="gate-text">THE GATES</div>
+            </div>
+        </div>
+
+        <div class="message" id="initialMessage">Tap anywhere to open the gates of possibility</div>
+
+        <div class="wish-container" id="wishContainer">
+            <div class="flower">
+                <div class="flower-img">🌸</div>
+                <div class="flower-name">Celestial Wishing Flower</div>
+            </div>
+
+            <div class="timer-container">
+                <div class="timer-instruction">Close your eyes and wish</div>
+                <div class="timer" id="timer">30</div>
+                <div class="timer-instruction">The flower will take your wish to the universe<br>and it will be granted
+                </div>
+            </div>
+        </div>
+
+        <div class="constellation" id="constellation">🌌</div>
+
+        <div class="teddy-container" id="teddyContainer">
+            <div class="teddy-emoji">🥊</div>
+            <div class="teddy-message">Go Anubhav, you can do it! You've got this!</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const starsContainer = document.getElementById('stars');
+            const particlesContainer = document.getElementById('particles');
+            const gateLeft = document.querySelector('.gate-left');
+            const gateRight = document.querySelector('.gate-right');
+            const initialMessage = document.getElementById('initialMessage');
+            const wishContainer = document.getElementById('wishContainer');
+            const constellation = document.getElementById('constellation');
+            const timer = document.getElementById('timer');
+            const teddyContainer = document.getElementById('teddyContainer');
+
+            let gatesOpened = false;
+            let timerStarted = false;
+            let countdown;
+
+            // Create stars
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particlesContainer.appendChild(particle);
+            }
+
+            // Show initial message
+            initialMessage.style.opacity = '1';
+
+            document.addEventListener('click', function () {
+                if (!gatesOpened) {
+                    initialMessage.style.opacity = '0';
+
+                    setTimeout(() => {
+                        gateLeft.style.transform = 'rotateY(-75deg)';
+                        gateRight.style.transform = 'rotateY(75deg)';
+                        gatesOpened = true;
+
+                        setTimeout(() => {
+                            wishContainer.classList.add('flex-visible');
+                            startTimer();
+                        }, 2500);
+                    }, 500);
+                }
+            });
+
+            function startTimer() {
+                if (timerStarted) return;
+
+                timerStarted = true;
+                let timeLeft = 30;
+
+                countdown = setInterval(() => {
+                    timeLeft--;
+                    timer.textContent = timeLeft < 10 ? `0:${timeLeft}` : `0:${timeLeft}`;
+
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        endWishingExperience();
+                    }
+                }, 1000);
+            }
+
+            function endWishingExperience() {
+                wishContainer.classList.remove('flex-visible');
+                constellation.style.opacity = '1';
+
+                setTimeout(() => {
+                    constellation.style.opacity = '0';
+                    setTimeout(() => {
+                        teddyContainer.classList.add('flex-visible');
+                    }, 1000);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>
